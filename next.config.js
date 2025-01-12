@@ -1,14 +1,11 @@
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const withPWA = require('next-pwa')
-const isProd = process.env.NODE_ENV === 'production'
-
-module.exports = withPWA({
-  pwa: {
-    dest: 'public',
-    disable: !isProd
-  },
+// @ts-check
+ 
+/** @type {import('next').NextConfig} */
+const nextConfig = {
   images: {
     // domains: ['media.graphassets.com'],
     domains: ['us-west-2.graphassets.com'],
   }
-})
+}
+ 
+module.exports = nextConfig
