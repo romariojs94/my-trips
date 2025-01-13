@@ -1,6 +1,6 @@
 import { CloseOutline } from '@styled-icons/evaicons-outline/CloseOutline'
 import LinkWrapper from 'components/LinkWrapper'
-
+import React from 'react'
 import * as S from './styles'
 
 export type PageTemplateProps = {

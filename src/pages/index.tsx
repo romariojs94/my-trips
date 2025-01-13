@@ -1,4 +1,5 @@
 import HomeTemplate from 'templates/Home'
+import React from 'react'
 import { MapProps } from 'components/Map'
 import client from 'graphql/client'
 import { GET_PLACES } from 'graphql/queries'

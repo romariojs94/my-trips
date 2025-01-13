@@ -1,4 +1,5 @@
 import { GetStaticProps } from 'next'
+import React from 'react'
 import client from 'graphql/client'
 import { GET_PLACES, GET_PLACE_BY_SLUG } from 'graphql/queries'
 import { useRouter } from 'next/dist/client/router'

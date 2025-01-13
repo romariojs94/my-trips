@@ -1,9 +1,26 @@
+import React from 'react'
 import { useRouter } from 'next/router'
-
-import { MapContainer, TileLayer, Marker, MapConsumer } from 'react-leaflet'
+import { MapContainer, TileLayer, Marker, useMap } from 'react-leaflet'
+import * as L from 'leaflet'
+import 'leaflet/dist/leaflet.css'
+import markerIcon2x from 'leaflet/dist/images/marker-icon-2x.png'
+import markerIcon from 'leaflet/dist/images/marker-icon.png'
+import markerShadow from 'leaflet/dist/images/marker-shadow.png'
 
 import * as S from './styles'
 import { mapView } from './config'
+
+interface DefaultIconType extends L.Icon {
+  _getIconUrl?: string;
+}
+
+// Configuração dos ícones do Leaflet
+delete (L.Icon.Default.prototype as DefaultIconType)._getIconUrl
+L.Icon.Default.mergeOptions({
+  iconUrl: markerIcon.src,
+  iconRetinaUrl: markerIcon2x.src,
+  shadowUrl: markerShadow.src
+})
 
 type Place = {
   id: string
@@ -37,6 +54,40 @@ const CustomTileLayer = () => {
   )
 }
 
+// Componente para manipular eventos do mapa
+const MapEvents = () => {
+  const map = useMap()
+
+  React.useEffect(() => {
+    const width =
+      window.innerWidth ||
+      document.documentElement.clientWidth ||
+      document.body.clientWidth
+
+    if (width < 768) {
+      map.setMinZoom(2)
+    }
+
+    const handleDragEnd = (): void => {
+      mapView.setView(map.getCenter())
+    }
+
+    const handleZoomEnd = (): void => {
+      mapView.setView(map.getCenter(), map.getZoom())
+    }
+
+    map.addEventListener('dragend', handleDragEnd)
+    map.addEventListener('zoomend', handleZoomEnd)
+
+    return () => {
+      map.removeEventListener('dragend', handleDragEnd)
+      map.removeEventListener('zoomend', handleZoomEnd)
+    }
+  }, [map])
+
+  return null
+}
+
 const Map = ({ places }: MapProps) => {
   const router = useRouter()
 
@@ -52,27 +103,7 @@ const Map = ({ places }: MapProps) => {
           [180, -180]
         ]}
       >
-        <MapConsumer>
-          {(map) => {
-            const width =
-              window.innerWidth ||
-              document.documentElement.clientWidth ||
-              document.body.clientWidth
-
-            if (width < 768) {
-              map.setMinZoom(2)
-            }
-
-            map.addEventListener('dragend', () => {
-              mapView.setView(map.getCenter())
-            })
-            map.addEventListener('zoomend', () => {
-              mapView.setView(map.getCenter(), map.getZoom())
-            })
-
-            return null
-          }}
-        </MapConsumer>
+        <MapEvents />
         <CustomTileLayer />
 
         {places?.map(({ id, slug, name, location }) => {

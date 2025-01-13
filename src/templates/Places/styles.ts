@@ -28,6 +28,9 @@ export const Gallery = styled.div`
   gap: 2rem;
 
   img {
+    max-width: 100%;
+    height: auto;
+    border-radius: var(--small);
     background: #f6f7f8;
     background-image: linear-gradient(
       to right,
