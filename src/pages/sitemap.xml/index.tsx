@@ -8,17 +8,17 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const { places } = await client.request<GetPlacesQuery>(GET_PLACES)
 
   const fields = places.map(({ slug }) => ({
-    loc: `https://my-trips.willianjusten.com.br/place/${slug}`,
+    loc: `https://minhas-viagens-2-0-2-5.vercel.app/place/${slug}`,
     lastmod: new Date().toISOString()
   }))
 
   fields.push(
     {
-      loc: 'https://my-trips.willianjusten.com.br',
+      loc: 'https://minhas-viagens-2-0-2-5.vercel.app',
       lastmod: new Date().toISOString()
     },
     {
-      loc: 'https://my-trips.willianjusten.com.br/about',
+      loc: 'https://minhas-viagens-2-0-2-5.vercel.app/about',
       lastmod: new Date().toISOString()
     }
   )

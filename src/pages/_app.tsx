@@ -40,7 +40,9 @@ function App({ Component, pageProps }: AppProps) {
       <StickyNote>
         <p>
           Build with ❤️ and coffee by {""}
-          <a href="instagram.com/romariojs94">Romário</a>
+          <a href="https://instagram.com/romariojs94" target="_blank" rel="noopener noreferrer">
+            Romário
+          </a>
         </p>
       </StickyNote>
     </>

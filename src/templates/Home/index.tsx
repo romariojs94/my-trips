@@ -16,7 +16,7 @@ export default function HomeTemplate({ places }: MapProps) {
         description="A simple project to show in a map the places that I went and show more informations and photos when clicked."
         canonical="minhas-viagens.vercel.app"
         openGraph={{
-          url: 'https://minhas-viagens.vercel.app',
+          url: 'minhas-viagens-2-0-2-5.vercel.app',
           title: 'Minhas viagens',
           description:
             'A simple project to show in a map the places that I went and show more informations and photos when clicked.',
